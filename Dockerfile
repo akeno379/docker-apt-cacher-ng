@@ -9,8 +9,8 @@ ENV APT_CACHER_NG_VERSION=0.7.26 \
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y apt-cacher-ng=${APT_CACHER_NG_VERSION}* \
  && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
- && cat 'PassThroughPattern: (packages-gitlab-com\.s3\.amazonaws\.com|packages\.gitlab\.com|mirrors\.fedoraproject\.org):443' >> /etc/apt-cacher-ng/acng.conf \
- && cat 'VfilePatternEx: ^(/\?release=[0-9]+&arch=.*)$' >>  /etc/apt-cacher-ng/acng.conf \
+ && echo 'PassThroughPattern: (packages-gitlab-com\.s3\.amazonaws\.com|packages\.gitlab\.com|mirrors\.fedoraproject\.org):443' >> /etc/apt-cacher-ng/acng.conf \
+ && echo 'VfilePatternEx: ^(/\?release=[0-9]+&arch=.*)$' >>  /etc/apt-cacher-ng/acng.conf \
  && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /sbin/entrypoint.sh
