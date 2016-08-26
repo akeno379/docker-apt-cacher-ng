@@ -15,7 +15,7 @@
 
 # Introduction
 
-Heavily based upon [sameersbn/docker-apt-cacher-ng](https://github.com/sameersbn/docker-apt-cacher-ng) with a few changes for my own environment.
+Heavily based upon [sameersbn/docker-apt-cacher-ng](https://github.com/sameersbn/docker-apt-cacher-ng) with a few changes for my own environment. Many thanks sameersbn!
 
 `Dockerfile` to create a [Docker](https://www.docker.com/) container image for [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/).
 
