@@ -1,10 +1,6 @@
-[![Circle CI](https://circleci.com/gh/sameersbn/docker-apt-cacher-ng.svg?style=shield)](https://circleci.com/gh/sameersbn/docker-apt-cacher-ng) [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/apt-cacher-ng/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/apt-cacher-ng)
-
-# sameersbn/apt-cacher-ng:latest
+# lurcio/apt-cacher-ng:latest
 
 - [Introduction](#introduction)
-  - [Contributing](#contributing)
-  - [Issues](#issues)
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Quickstart](#quickstart)
@@ -19,46 +15,26 @@
 
 # Introduction
 
+Heavily based upon [sameersbn/docker-apt-cacher-ng](https://github.com/sameersbn/docker-apt-cacher-ng) with a few changes for my own environment.
+
 `Dockerfile` to create a [Docker](https://www.docker.com/) container image for [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/).
 
 Apt-Cacher NG is a caching proxy, specialized for package files from Linux distributors, primarily for [Debian](http://www.debian.org/) (and [Debian based](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based)) distributions but not limited to those.
-
-## Contributing
-
-If you find this image useful here's how you can help:
-
-- Send a pull request with your awesome features and bug fixes
-- Help users resolve their [issues](../../issues?q=is%3Aopen+is%3Aissue).
-- Support the development of this image with a [donation](http://www.damagehead.com/donate/)
-
-## Issues
-
-Before reporting your issue please try updating Docker to the latest version and check if it resolves the issue. Refer to the Docker [installation guide](https://docs.docker.com/installation) for instructions.
-
-SELinux users should try disabling SELinux using the command `setenforce 0` to see if it resolves the issue.
-
-If the above recommendations do not help then [report your issue](../../issues/new) along with the following information:
-
-- Output of the `docker version` and `docker info` commands
-- The `docker run` command or `docker-compose.yml` used to start the image. Mask out the sensitive bits.
-- Please state if you are using [Boot2Docker](http://www.boot2docker.io), [VirtualBox](https://www.virtualbox.org), etc.
 
 # Getting started
 
 ## Installation
 
-Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/sameersbn/apt-cacher-ng) and is the recommended method of installation.
-
-> **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/apt-cacher-ng)
+Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/lurcio/apt-cacher-ng) and is the recommended method of installation.
 
 ```bash
-docker pull sameersbn/apt-cacher-ng:latest
+docker pull lurcio/apt-cacher-ng:latest
 ```
 
 Alternatively you can build the image yourself.
 
 ```bash
-docker build -t sameersbn/apt-cacher-ng github.com/sameersbn/docker-apt-cacher-ng
+docker build -t lurcio/apt-cacher-ng github.com/lurcio/apt-cacher-ng
 ```
 
 ## Quickstart
@@ -69,7 +45,7 @@ Start Apt-Cacher NG using:
 docker run --name apt-cacher-ng -d --restart=always \
   --publish 3142:3142 \
   --volume /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng \
-  sameersbn/apt-cacher-ng:latest
+  lurcio/apt-cacher-ng:latest
 ```
 
 *Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
@@ -82,7 +58,7 @@ You can customize the launch command of Apt-Cacher NG server by specifying argum
 docker run --name apt-cacher-ng -it --rm \
   --publish 3142:3142 \
   --volume /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng \
-  sameersbn/apt-cacher-ng:latest -h
+  lurcio/apt-cacher-ng:latest -h
 ```
 
 ## Persistence
@@ -132,7 +108,7 @@ Using the [Command-line arguments](#command-line-arguments) feature, you can spe
 docker run --name apt-cacher-ng -it --rm \
   --publish 3142:3142 \
   --volume /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng \
-  sameersbn/apt-cacher-ng:latest -e
+  lurcio/apt-cacher-ng:latest -e
 ```
 
 The same can also be achieved on a running instance by visiting the url http://localhost:3142/acng-report.html in the web browser and selecting the **Start Scan and/or Expiration** option.
@@ -144,7 +120,7 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull sameersbn/apt-cacher-ng:latest
+  docker pull lurcio/apt-cacher-ng:latest
   ```
 
   2. Stop the currently running image:
@@ -164,7 +140,7 @@ To upgrade to newer releases:
   ```bash
   docker run -name apt-cacher-ng -d \
     [OPTIONS] \
-    sameersbn/apt-cacher-ng:latest
+    lurcio/apt-cacher-ng:latest
   ```
 
 ## Shell Access
