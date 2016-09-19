@@ -9,7 +9,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y apt-cacher-ng \
  && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
  && echo 'PassThroughPattern: (packages-gitlab-com\.s3\.amazonaws\.com|packages\.gitlab\.com|mirrors\.fedoraproject\.org):443' >> /etc/apt-cacher-ng/acng.conf \
- && echo 'VfilePatternEx: ^(\?release=[0-9]+&arch=.*|\?osname=[a-z0-9]+&basearch=x86_64&native=[0-9]+)$' >>  /etc/apt-cacher-ng/acng.conf \
+ && echo 'VfilePatternEx: ^(/\?release=[0-9]+&arch=.*)$' >>  /etc/apt-cacher-ng/acng.conf \
  && echo 'Remap-centos: file:centos_mirrors ; http://mirror.ox.ac.uk/sites/mirror.centos.org/' >>  /etc/apt-cacher-ng/acng.conf \
  && rm -rf /var/lib/apt/lists/*
 
