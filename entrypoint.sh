@@ -23,6 +23,19 @@ create_pid_dir
 create_cache_dir
 create_log_dir
 
+offline_mode() {
+  sed "s/Offlinemode[[:space:]]\+:[[:space:]]\+[01]/Offlinemode : $1/" -i /etc/apt-cacher-ng/acng.conf
+}
+
+if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
+  offline_mode 0
+  echo "apt-cacher-ng will running with online mode ...."
+else
+  offline_mode 1
+  echo "Warning: apt-cacher-ng will running with offline mode ...."
+fi
+
+
 # allow arguments to be passed to apt-cacher-ng
 if [[ ${1:0:1} = '-' ]]; then
   EXTRA_ARGS="$@"

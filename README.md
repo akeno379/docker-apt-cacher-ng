@@ -1,4 +1,4 @@
-# lurcio/apt-cacher-ng:latest
+# seifer08ms/apt-cacher-ng:latest
 
 - [Introduction](#introduction)
 - [Getting started](#getting-started)
@@ -15,11 +15,15 @@
 
 # Introduction
 
-Heavily based upon [sameersbn/docker-apt-cacher-ng](https://github.com/sameersbn/docker-apt-cacher-ng) with a few changes for my own environment. Many thanks sameersbn!
-
-`Dockerfile` to create a [Docker](https://www.docker.com/) container image for [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/).
+This git repository helps you installing and running [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) quickly on your local machine.
 
 Apt-Cacher NG is a caching proxy, specialized for package files from Linux distributors, primarily for [Debian](http://www.debian.org/) (and [Debian based](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based)) distributions but not limited to those.
+
+This repository is to create a [Docker](https://www.docker.com/) container image for Apt-Cacher NG.It is a modified version of [sameersbn/docker-apt-cacher-ng](https://github.com/sameersbn/docker-apt-cacher-ng) and [lurcio/docker-apt-cacher-ng](https://github.com/lurcio/docker-apt-cacher-ng) with a few changes including ubuntu mirrors list, extended Makefile and switching offline mode. Many thanks sameersbn and lurcio!
+
+# Swithing offline mode
+
+This feature is the major update from original codes. The Docker container can automatically check network and choose offline or online mode in the beginning of startup. If the network condition is change during running, you can restart it to check it again using `docker restart apt-cacher-ng`. 
 
 # Getting started
 
@@ -28,51 +32,25 @@ Apt-Cacher NG is a caching proxy, specialized for package files from Linux distr
 Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/lurcio/apt-cacher-ng) and is the recommended method of installation.
 
 ```bash
-docker pull lurcio/apt-cacher-ng:latest
+docker pull seifer_08ms/apt-cacher-ng:latest
 ```
 
-Alternatively you can build the image yourself.
+Alternatively you can build the image yourself with make command.
 
 ```bash
-docker build -t lurcio/apt-cacher-ng github.com/lurcio/apt-cacher-ng
+make
 ```
 
 ## Quickstart
 
-Start Apt-Cacher NG using:
+Start Apt-Cacher NG daemon using:
 
 ```bash
-docker run --name apt-cacher-ng -d --restart=always \
-  --publish 3142:3142 \
-  --volume /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng \
-  lurcio/apt-cacher-ng:latest
+make install HOST_CACHE_DIR=/srv/docker/apt-cacher-ng
 ```
+This commnad could mounts a volume for persistence. The parameter `HOST_CACHE_DIR` denotes the location of mounting a volume at `/var/cache/apt-cacher-ng`.
 
 *Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
-
-## Command-line arguments
-
-You can customize the launch command of Apt-Cacher NG server by specifying arguments to `apt-cacher-ng` on the `docker run` command. For example the following command prints the help menu of `apt-cacher-ng` command:
-
-```bash
-docker run --name apt-cacher-ng -it --rm \
-  --publish 3142:3142 \
-  --volume /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng \
-  lurcio/apt-cacher-ng:latest -h
-```
-
-## Persistence
-
-For the cache to preserve its state across container shutdown and startup you should mount a volume at `/var/cache/apt-cacher-ng`.
-
-> *The [Quickstart](#quickstart) command already mounts a volume for persistence.*
-
-SELinux users should update the security context of the host mountpoint so that it plays nicely with Docker:
-
-```bash
-mkdir -p /srv/docker/apt-cacher-ng
-chcon -Rt svirt_sandbox_file_t /srv/docker/apt-cacher-ng
-```
 
 ## Usage
 
@@ -90,29 +68,6 @@ RUN echo 'Acquire::HTTP::Proxy "http://172.17.42.1:3142";' >> /etc/apt/apt.conf.
  && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01proxy
 ```
 
-## Logs
-
-To access the Apt-Cacher NG logs, located at `/var/log/apt-cacher-ng`, you can use `docker exec`. For example, if you want to tail the logs:
-
-```bash
-docker exec -it apt-cacher-ng tail -f /var/log/apt-cacher-ng/apt-cacher.log
-```
-
-# Maintenance
-
-## Cache expiry
-
-Using the [Command-line arguments](#command-line-arguments) feature, you can specify the `-e` argument to initiate Apt-Cacher NG's cache expiry maintenance task.
-
-```bash
-docker run --name apt-cacher-ng -it --rm \
-  --publish 3142:3142 \
-  --volume /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng \
-  lurcio/apt-cacher-ng:latest -e
-```
-
-The same can also be achieved on a running instance by visiting the url http://localhost:3142/acng-report.html in the web browser and selecting the **Start Scan and/or Expiration** option.
-
 ## Upgrading
 
 To upgrade to newer releases:
@@ -120,33 +75,30 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull lurcio/apt-cacher-ng:latest
+  make pull
   ```
 
-  2. Stop the currently running image:
+  2. Stop and remove the container:
 
   ```bash
-  docker stop apt-cacher-ng
-  ```
-
-  3. Remove the stopped container
-
-  ```bash
-  docker rm -v apt-cacher-ng
+  make clean
   ```
 
   4. Start the updated image
 
   ```bash
-  docker run -name apt-cacher-ng -d \
-    [OPTIONS] \
-    lurcio/apt-cacher-ng:latest
+  make install
   ```
 
 ## Shell Access
 
-For debugging and maintenance purposes you may want access the containers shell. If you are using Docker version `1.3.0` or higher you can access a running containers shell by starting `bash` using `docker exec`:
+For debugging and maintenance purposes you may want access the containers shell:
 
 ```bash
-docker exec -it apt-cacher-ng bash
+make shell
 ```
+
+## Further help
+
+See also [lurcio/docker-apt-cacher-ng](https://github.com/lurcio/docker-apt-cacher-ng)
+
