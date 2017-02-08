@@ -2,9 +2,9 @@ IMAGE_NAME = seifer08ms/apt-cacher-ng
 CONTAINER_NAME = apt-cacher-ng
 HOST_CACHE_DIR = /srv/docker/apt-cacher-ng
 
-all:     build install
-
 default: build
+
+all:     build install
 
 debug : build run-debug
 
