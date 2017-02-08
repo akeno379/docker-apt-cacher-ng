@@ -1,18 +1,14 @@
 # seifer08ms/apt-cacher-ng:latest
 
 - [Introduction](#introduction)
+- [Switching offline mode](#switching-offline-mode)
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Quickstart](#quickstart)
-  - [Command-line arguments](#command-line-arguments)
-  - [Persistence](#persistence)
   - [Usage](#usage)
-  - [Logs](#logs)
-- [Maintenance](#maintenance)
-  - [Cache expiry](#cache-expiry)
   - [Upgrading](#upgrading)
   - [Shell Access](#shell-access)
-
+- [Further help](#further-help)
 # Introduction
 
 This git repository helps you installing and running [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) quickly on your local machine.
@@ -21,7 +17,7 @@ Apt-Cacher NG is a caching proxy, specialized for package files from Linux distr
 
 This repository is to create a [Docker](https://www.docker.com/) container image for Apt-Cacher NG.It is a modified version of [sameersbn/docker-apt-cacher-ng](https://github.com/sameersbn/docker-apt-cacher-ng) and [lurcio/docker-apt-cacher-ng](https://github.com/lurcio/docker-apt-cacher-ng) with a few changes including ubuntu mirrors list, extended Makefile and switching offline mode. Many thanks sameersbn and lurcio!
 
-# Swithing offline mode
+# Switching offline mode
 
 This feature is the major update from original codes. The Docker container can automatically check network and choose offline or online mode in the beginning of startup. If the network condition is change during running, you can restart it to check it again using `docker restart apt-cacher-ng`. 
 
@@ -98,7 +94,7 @@ For debugging and maintenance purposes you may want access the containers shell:
 make shell
 ```
 
-## Further help
+# Further help
 
 See also [lurcio/docker-apt-cacher-ng](https://github.com/lurcio/docker-apt-cacher-ng)
 
