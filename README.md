@@ -9,6 +9,9 @@
   - [Upgrading](#upgrading)
   - [Shell Access](#shell-access)
 - [Further help](#further-help)
+
+***
+
 # Introduction
 
 This git repository helps you installing and running [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/) quickly on your local machine.
