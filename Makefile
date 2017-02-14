@@ -1,7 +1,7 @@
 IMAGE_NAME = seifer08ms/apt-cacher-ng
 CONTAINER_NAME = apt-cacher-ng
 HOST_CACHE_DIR = /srv/docker/apt-cacher-ng
-
+PROXY = xx-net
 default: build
 
 all:     build install
@@ -22,6 +22,8 @@ shell:
 
 install:
 	docker run  --name ${CONTAINER_NAME} -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
+proxy:
+	docker run --name ${CONTAINER_NAME} --link ${PROXY}:${PROXY} -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
 clean:     
 	docker stop ${CONTAINER_NAME}
 	docker rm ${CONTAINER_NAME}
