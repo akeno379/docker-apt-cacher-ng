@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER margent@gmail.com
+MAINTAINER hi181904665@gmail.com
 
 ENV APT_CACHER_NG_CACHE_DIR=/var/cache/apt-cacher-ng \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
