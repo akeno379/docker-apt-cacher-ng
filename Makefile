@@ -23,7 +23,7 @@ shell:
 install:
 	docker run  --name ${CONTAINER_NAME} -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
 proxy:
-	docker run --name ${CONTAINER_NAME} --link ${PROXY}:${PROXY} -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
+	docker run --name ${CONTAINER_NAME} --link ${PROXY}:proxy_server -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
 clean:     
 	docker stop ${CONTAINER_NAME}
 	docker rm ${CONTAINER_NAME}
