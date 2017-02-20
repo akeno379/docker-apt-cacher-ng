@@ -6,7 +6,7 @@ ENV APT_CACHER_NG_CACHE_DIR=/var/cache/apt-cacher-ng \
     APT_CACHER_NG_USER=apt-cacher-ng
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y apt-cacher-ng iputils-ping \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y apt-cacher-ng iputils-ping cron \
  && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /sbin/entrypoint.sh

@@ -9,3 +9,9 @@ sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
  && echo 'Offlinemode : 0' >>  /etc/apt-cacher-ng/acng.conf 
 
 echo 'Acquire::http { Proxy "http://localhost:3142"; };' | tee /etc/apt/apt.conf.d/02proxy
+
+/etc/cron.daily/apt-cacher-ng
+
+echo "0 * * * * /etc/cron.daily/apt-cacher-ng" >> maint_cron
+crontab maint_cron
+rm maint_cron
