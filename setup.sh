@@ -6,12 +6,11 @@ sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
  && echo 'Proxy: http://proxy_server:8087 ' >> /etc/apt-cacher-ng/acng.conf \
  && echo 'OptProxyCheckInterval: 320 ' >> /etc/apt-cacher-ng/acng.conf \
  && echo 'OptProxyTimeout: 2 ' >> /etc/apt-cacher-ng/acng.conf \
+ && echo 'ReuseConnections: 0 '>> /etc/apt-cacher-ng/acng.conf \
  && echo 'Offlinemode : 0' >>  /etc/apt-cacher-ng/acng.conf 
 
 echo 'Acquire::http { Proxy "http://localhost:3142"; };' | tee /etc/apt/apt.conf.d/02proxy
-
-#/etc/cron.daily/apt-cacher-ng
-/usr/lib/apt-cacher-ng/acngtool maint
+sed -i '8s/^/export ACNGREQ="?abortOnErrors=aOe&byPath=bP&byChecksum=bS&truncNow=tN&incomAsDamaged=iad&purgeNow=pN&doExpire=Start+Scan+and%2For+Expiration&calcSize=cs&asNeeded=an"/' /etc/cron.daily/apt-cacher-ng
 
 echo "0 * * * * /etc/cron.daily/apt-cacher-ng" >> maint_cron
 crontab maint_cron

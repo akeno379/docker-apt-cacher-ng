@@ -52,3 +52,7 @@ if [[ -z ${1} ]]; then
 else
   exec "$@"
 fi
+
+export ACNGREQ="?abortOnErrors=aOe&byPath=bP&byChecksum=bS&truncNow=tN&incomAsDamaged=iad&purgeNow=pN&doExpire=Start+Scan+and%2For+Expiration&calcSize=cs&asNeeded=an"
+
+/usr/lib/apt-cacher-ng/acngtool maint
