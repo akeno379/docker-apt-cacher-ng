@@ -21,16 +21,14 @@ shell:
 	docker exec -it ${CONTAINER_NAME} /bin/bash
 
 install:
-	docker run  --name ${CONTAINER_NAME} -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
+	docker run  --name ${CONTAINER_NAME} -d --restart=always -p 3142:3142  --env DISABLE_PROXY=1 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
 proxy:
 	docker run --name ${CONTAINER_NAME} --link ${PROXY}:proxy_server -d --restart=always -p 3142:3142 -v ${HOST_CACHE_DIR}:/var/cache/apt-cacher-ng ${IMAGE_NAME}
 clean:     
 	docker stop ${CONTAINER_NAME}
 	docker rm ${CONTAINER_NAME}
 purge:
-	docker stop ${CONTAINER_NAME}
-	docker rm ${CONTAINER_NAME}	    
-	docker rmi ${IMAGE_NAME}
+	docker stop ${CONTAINER_NAME};docker rm ${CONTAINER_NAME};docker rmi ${IMAGE_NAME}
 
 release: build push
 
