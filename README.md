@@ -31,7 +31,7 @@ This feature is the major update from original codes. The Docker container can a
 Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/lurcio/apt-cacher-ng) and is the recommended method of installation.
 
 ```bash
-docker pull seifer_08ms/apt-cacher-ng:latest
+docker pull seifer08ms/apt-cacher-ng:latest
 ```
 
 Alternatively you can build the image yourself with make command.
