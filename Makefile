@@ -1,4 +1,4 @@
-IMAGE_NAME = seifer08ms/apt-cacher-ng
+IMAGE_NAME = akeno379/apt-cacher-ng
 CONTAINER_NAME = apt-cacher-ng
 HOST_CACHE_DIR = /srv/docker/apt-cacher-ng
 PROXY = xx-net

@@ -1,7 +1,13 @@
-AptCacherNG:
-  image: seifer08ms/apt-cacher-ng:latest
-  ports:
-    - "3142:3142"
-  volumes:
-    - /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng
-  restart: always
+version: '3.3'
+
+services:
+  AptCacherNG:
+    container_name: apt-cacher-ng
+    image: akeno379/apt-cacher-ng:latest
+    ports:
+      - "3142:3142"
+    restart: unless-stopped
+    volumes:
+      - /opt/apt-cacher-ng/cache:/var/cache/apt-cacher-ng
+    environment:
+      DISABLE_PROXY: "1"
