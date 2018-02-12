@@ -19,7 +19,7 @@ COPY centos_mirrors /etc/apt-cacher-ng/centos_mirrors
 RUN chmod 644 /etc/apt-cacher-ng/centos_mirrors
 COPY backends_docker /etc/apt-cacher-ng/backends_docker
 RUN chmod 644 /etc/apt-cacher-ng/backends_docker
-COPY backends_dotnet1 /etc/apt-cacher-ng/backends_dotnet1
+COPY backends_dotnet /etc/apt-cacher-ng/backends_dotnet
 RUN chmod 644 /etc/apt-cacher-ng/backends_dotnet
 COPY backends_node8 /etc/apt-cacher-ng/backends_node8
 RUN chmod 644 /etc/apt-cacher-ng/backends_node8
