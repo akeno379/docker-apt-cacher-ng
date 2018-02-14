@@ -5,6 +5,7 @@ sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
  && echo 'Remap-centos: file:centos_mirrors ; http://mirror.ox.ac.uk/sites/mirror.centos.org/' >>  /etc/apt-cacher-ng/acng.conf \
  && echo 'Remap-docker: http://proxydocker.com ; file:backends_docker' >>  /etc/apt-cacher-ng/acng.conf \
  && echo 'Remap-dotnet: http://proxydotnet.com ; file:backends_dotnet' >>  /etc/apt-cacher-ng/acng.conf \
+ && echo 'Remap-dotnet2: http://proxydotnet2.com ; file:backends_dotnet2' >>  /etc/apt-cacher-ng/acng.conf \
  && echo 'Remap-node8: http://proxynode8.com ; file:backends_node8' >>  /etc/apt-cacher-ng/acng.conf \
  && echo 'PrecacheFor: debrep/dists/*/main/binary-amd64/* uburep/dists/*/main/binary-amd64/Packages* ' >> /etc/apt-cacher-ng/acng.conf \
  && echo 'ReuseConnections: 0 '>> /etc/apt-cacher-ng/acng.conf \

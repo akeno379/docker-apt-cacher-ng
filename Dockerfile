@@ -1,5 +1,5 @@
 FROM debian:stretch-slim
-MAINTAINER akeno.nakamura@gmail.com
+LABEL maintainer="akeno.nakamura@gmail.com"
 
 ENV APT_CACHER_NG_CACHE_DIR=/var/cache/apt-cacher-ng \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
@@ -21,6 +21,8 @@ COPY backends_docker /etc/apt-cacher-ng/backends_docker
 RUN chmod 644 /etc/apt-cacher-ng/backends_docker
 COPY backends_dotnet /etc/apt-cacher-ng/backends_dotnet
 RUN chmod 644 /etc/apt-cacher-ng/backends_dotnet
+COPY backends_dotnet2 /etc/apt-cacher-ng/backends_dotnet2
+RUN chmod 644 /etc/apt-cacher-ng/backends_dotnet2
 COPY backends_node8 /etc/apt-cacher-ng/backends_node8
 RUN chmod 644 /etc/apt-cacher-ng/backends_node8
 
